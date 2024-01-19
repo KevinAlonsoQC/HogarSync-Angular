@@ -1,0 +1,79 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list [inset]="true">
+      <ion-item>
+        <ion-button fill="clear" (click)="manageFamilys()">Gestionar Mis Familias<ion-icon name="accessibility-outline"></ion-icon></ion-button>
+      </ion-item>
+      <hr>
+      <ion-item>
+        <ion-button fill="clear" (click)="updateAccount()">Mi Cuenta <ion-icon name="key-outline"></ion-icon></ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button fill="clear">Ver Historial <ion-icon name="calendar-sharp"></ion-icon></ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>HogarSync</ion-title>
+      <ion-buttons slot="end">
+        <ion-tab-button (click)="logout()">
+          <ion-icon name="log-out-outline"></ion-icon>      
+        </ion-tab-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding"> 
+    <h6 class="ion-text-center" style="font-size: 15px; font-weight:700;">Perteneces a las siguientes familias</h6>
+    <br><br>
+    
+    <ion-fab (click)="create_family()" vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  
+
+    <div style="max-height: 350px; overflow-y: auto;">
+      <div *ngIf="familias.length > 0; else noFamilias">
+        <div *ngFor="let pro of familias">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ pro.nombre_familia }}</ion-card-title>
+              <ng-container *ngIf="pro.is_admin">
+                <p>Eres Administrador de este núcleo</p>
+                <ion-button (click)="modificarFamilia(pro)" color="tertiary">Administrar</ion-button>
+                <ion-button (click)="modificarFamilia(pro)">Modificar</ion-button>
+                <ion-button (click)="eliminarFamilia(pro)" color="danger">Eliminar</ion-button>
+
+              </ng-container>
+            </ion-card-header>
+          </ion-card>
+          <br>
+        </div>
+        <ion-infinite-scroll threshold="50px" (ionInfinite)="cargarMasDatos()">
+          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{texto_carga}}"></ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </div>
+      
+
+      <ng-template #noFamilias>
+        <p class="ion-text-center" style="font-size: 25px; font-weight:700;">No perteneces a ninguna Familia :(</p>
+      </ng-template>
+    </div>
+  </ion-content>
+  
+  
+</div>

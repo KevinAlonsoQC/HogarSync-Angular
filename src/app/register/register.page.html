@@ -1,0 +1,79 @@
+<div class="ion-page ion-text-center">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>HogarSync</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content class="ion-padding ion-text-center">
+    <p *ngIf="registrado">¡Te has registrado exitosamente!</p>
+    <form *ngIf="formulario" [formGroup]="formulario" (ngSubmit)="saveUsuario()" >  
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input type="text" formControlName="nombre"></ion-input>
+  
+        <ion-note slot="error" *ngIf="campo('nombre').invalid  && campo('nombre')?.errors && campo('nombre').errors.required && fueTocado('nombre')">
+          Este campo es requerido
+        </ion-note>
+        <ion-note slot="error" *ngIf="campo('nombre').invalid  && campo('nombre')?.errors && campo('nombre').errors['maxlength'] && fueTocado('nombre')">
+          Los caracteres maximos son 20
+        </ion-note>
+        <ion-note slot="error" *ngIf="campo('nombre').invalid  && campo('nombre')?.errors && campo('nombre').errors['minlength'] && fueTocado('nombre')">
+          Los caracteres mínimos son 3
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Apellido</ion-label>
+        <ion-input type="text" formControlName="apellido"></ion-input>
+  
+        <ion-note slot="error" *ngIf="campo('apellido').invalid  && campo('apellido')?.errors && campo('apellido').errors.required && fueTocado('apellido')">
+          Este campo es requerido
+        </ion-note>
+        <ion-note slot="error" *ngIf="campo('apellido').invalid  && campo('apellido')?.errors && campo('apellido').errors['maxlength'] && fueTocado('apellido')">
+          Los caracteres maximos son 20
+        </ion-note>
+        <ion-note slot="error" *ngIf="campo('apellido').invalid  && campo('apellido')?.errors && campo('apellido').errors['minlength'] && fueTocado('apellido')">
+          Los caracteres mínimos son 3
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Correo</ion-label>
+        <ion-input type="email" formControlName="correo"></ion-input>
+  
+        <ion-note slot="error" *ngIf="campo('correo').invalid  && campo('correo')?.errors && campo('correo').errors.required && fueTocado('correo')">
+          Este campo es requerido
+        </ion-note>
+        <ion-note slot="error" *ngIf="campo('correo').hasError('email') && fueTocado('correo')">
+          El formato del correo electrónico no es válido
+        </ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+  
+        <ion-note slot="error" *ngIf="campo('password').invalid  && campo('password')?.errors && campo('password').errors.required && fueTocado('password')">
+          Este campo es requerido
+        </ion-note>
+        <ion-note slot="error" *ngIf="campo('password').invalid  && campo('password')?.errors && campo('password').errors['minlength'] && fueTocado('password')">
+          Los caracteres mínimos son 8
+        </ion-note>
+      </ion-item>
+
+  
+      <ion-item>
+        <ion-button [disabled]="formulario.invalid" role="submit" type="submit">Registrarme</ion-button>
+      </ion-item>
+
+    </form>
+
+    <ion-button fill="clear" [routerLink]="['/home']">Volver</ion-button>
+
+    <p>All Rights Reserved © 2024 <br>
+      Kevin Quintrequeo
+    </p>
+  </ion-content>
+</div>

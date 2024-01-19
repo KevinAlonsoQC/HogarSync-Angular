@@ -1,20 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<div class="ion-page ion-text-center">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title>HogarSync</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+  
+  <ion-content class="ion-padding ion-text-center">
+    <h3>¡Bienvenido!</h3>
+    <h6>Ingresa tus datos para continuar...</h6>
+
+    <!-- Utiliza ngModel para vincular los valores de los inputs -->
+    <form (ngSubmit)="login(loginForm)" #loginForm="ngForm">
+      <input required type="email" placeholder="Correo" (ngModel)="loginFormModel.email" name="email">
+      <input required type="password" placeholder="Contraseña" (ngModel)="loginFormModel.password" name="password">
+      
+      <br><br>
+      <ion-button type="submit">Iniciar Sesión</ion-button>
+    </form>
+
+    <ion-button fill="clear" (click)="register()">Registrarse</ion-button>
+    <ion-button fill="clear">Olvidé Mi Contraseña</ion-button>
+
+    <p>All Rights Reserved © 2024 <br>
+      Kevin Quintrequeo
+    </p>
+  </ion-content>
+</div>
+
+

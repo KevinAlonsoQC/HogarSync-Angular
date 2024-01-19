@@ -1,0 +1,52 @@
+{
+  "usuario": [
+    {
+      "nombre": "Kevin",
+      "apellido": "Cerda",
+      "correo": "kevinfzrp@gmail.com",
+      "password": "1234567890",
+      "msj_activo": true,
+      "familias": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "id": 1
+    },
+    {
+      "nombre": "Kevin",
+      "apellido": "Quintrequeo",
+      "correo": "kevinfz@gmail.com",
+      "password": "12345678",
+      "msj_activo": true,
+      "es_admin": false,
+      "familias": [],
+      "id": 2
+    }
+  ],
+  "familia": [
+    {
+      "nombre_familia": "Quintrequeo Cerda",
+      "admin_familia": 2,
+      "id": 1
+    },
+    {
+      "nombre_familia": "Cerdaa",
+      "admin_familia": 1,
+      "id": 2
+    },
+    {
+      "nombre_familia": "QAAA",
+      "admin_familia": 1,
+      "id": 3
+    },
+    {
+      "nombre_familia": "Garrido",
+      "admin_familia": 1,
+      "id": 4
+    }
+  ],
+  "job": [],
+  "tarea_realizada": []
+}

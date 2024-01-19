@@ -1,0 +1,59 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list [inset]="true">
+      <ion-item>
+        <ion-button fill="clear" (click)="manageFamilys()">Gestionar Mis Familias<ion-icon name="accessibility-outline"></ion-icon></ion-button>
+      </ion-item>
+      <hr>
+      <ion-item>
+        <ion-button fill="clear" (click)="updateAccount()">Mi Cuenta <ion-icon name="key-outline"></ion-icon></ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button fill="clear">Ver Historial <ion-icon name="calendar-sharp"></ion-icon></ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>HogarSync</ion-title>
+      <ion-buttons slot="end">
+        <ion-tab-button (click)="logout()">
+          <ion-icon name="log-out-outline"></ion-icon>      
+        </ion-tab-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding"> 
+    <h6 class="ion-text-center" style="font-size: 15px; font-weight:700;">BIENVENIDO A TU NÚCLEO DE FAMILIA<br><br> {{ nombre | uppercase}}</h6>
+    <br>
+    <p style="font-size:13px; font-weight: 500; " class="ion-text-center">Últimas actividades realizadas en el hogar de los {{familia}}</p>
+    <br>
+
+    <div style="max-height: 350px; overflow-y: auto;">
+      <ion-card>
+        <img src="https://ionicframework.com/docs/img/demos/card-media.png" />
+        <ion-card-header>
+          <ion-card-title>Lavar La Loza</ion-card-title>
+          <ion-card-subtitle>Kevin Quintrequeo</ion-card-subtitle>
+          <ion-card-subtitle>10:30 17/01/2024</ion-card-subtitle>
+
+        </ion-card-header>
+    
+      </ion-card>
+    </div>
+   
+  </ion-content>
+  
+</div>
