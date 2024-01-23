@@ -8,16 +8,14 @@
       "msj_activo": true,
       "familias": [
         1,
-        2,
-        3,
-        4
+        2
       ],
       "id": 1
     },
     {
       "nombre": "Kevin",
       "apellido": "Quintrequeo",
-      "correo": "kevinfz@gmail.com",
+      "correo": "kevin@gmail.com",
       "password": "12345678",
       "msj_activo": true,
       "es_admin": false,
@@ -27,26 +25,32 @@
   ],
   "familia": [
     {
-      "nombre_familia": "Quintrequeo Cerda",
-      "admin_familia": 2,
+      "nombre_familia": "Quintrequeo",
+      "admin_familia": 1,
       "id": 1
     },
     {
-      "nombre_familia": "Cerdaa",
+      "nombre_familia": "Cerda",
       "admin_familia": 1,
+      "id": 2
+    }
+  ],
+  "job": [
+    {
+      "nombre_tarea": "Lavar Platos",
+      "familia": 1,
+      "id": 1
+    },
+    {
+      "nombre_tarea": "Hacer las camas",
+      "familia": 1,
       "id": 2
     },
     {
-      "nombre_familia": "QAAA",
-      "admin_familia": 1,
+      "nombre_tarea": "Barrer el patio",
+      "familia": 1,
       "id": 3
-    },
-    {
-      "nombre_familia": "Garrido",
-      "admin_familia": 1,
-      "id": 4
     }
   ],
-  "job": [],
   "tarea_realizada": []
 }

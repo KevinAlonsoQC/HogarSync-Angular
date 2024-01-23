@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CrearFamiliaPage } from './crear-familia.page';
+import { UnirseFamiliaPage } from './unirse-familia.page';
 
-describe('CrearFamiliaPage', () => {
-  let component: CrearFamiliaPage;
-  let fixture: ComponentFixture<CrearFamiliaPage>;
+describe('UnirseFamiliaPage', () => {
+  let component: UnirseFamiliaPage;
+  let fixture: ComponentFixture<UnirseFamiliaPage>;
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(CrearFamiliaPage);
+    fixture = TestBed.createComponent(UnirseFamiliaPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

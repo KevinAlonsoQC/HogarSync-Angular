@@ -1,3 +1,35 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu contentId="main-content">
+    <!-- Contenido del menú -->
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Opciones</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list [inset]="true">
+        <ion-item>
+          <ion-button fill="clear" (click)="home()">Inicio<ion-icon name="home-outline"></ion-icon></ion-button>
+        </ion-item>
+        <hr>
+        <ion-item>
+          <ion-button fill="clear" (click)="manageFamilys()">Gestionar Mis Familias<ion-icon name="accessibility-outline"></ion-icon></ion-button>
+        </ion-item>
+        <hr>
+        <ion-item>
+          <ion-button fill="clear" (click)="updateAccount()">Actualizar Mis Datos <ion-icon name="key-outline"></ion-icon></ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-button fill="clear">Ver Historial <ion-icon name="calendar-sharp"></ion-icon></ion-button>
+        </ion-item>
+        <hr>
+        <ion-item>
+          <ion-button fill="clear" (click)="logout()">Cerrar Sesión <ion-icon name="log-out-outline"></ion-icon></ion-button>
+        </ion-item>
+
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

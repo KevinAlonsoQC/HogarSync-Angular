@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../Servicios/service.service';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { FunctionsService } from '../../Servicios/functions.service';
+
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { FamiliaID } from 'src/app/Modelos/familia';
 
 
 @Component({
@@ -12,50 +15,34 @@ import { AlertController } from '@ionic/angular';
 export class InicioPage implements OnInit {
 
   private usuario: any;
+  public familias: Array<FamiliaID> = [];
   public nombre: string = "Prueba Prueba"
-  public familia : string = "Quintrequeo"
 
-  constructor(private router: Router, private api: ApiService, private alertController: AlertController, private ruteador:ActivatedRoute) { }
+  constructor(private router: Router, private api: ApiService, private alertController: AlertController, private ruteador:ActivatedRoute, private functions: FunctionsService) { }
 
   ngOnInit() {
   }
 
   ionViewWillEnter() {
+    this.functions.closeMenu();  // Cierra el ion-menu
     this.api.CallBack_One_Usuario(Number(localStorage.getItem('infoUser'))).subscribe(callback => {
       if(callback){
         this.usuario = callback;
-        this.nombre = this.usuario.nombre +' '+ this.usuario.apellido;
+        this.api.CallBack_All_Familias().subscribe(datosActualizados => {
+          // Verifica si 'this.usuario' está definido y si tiene la propiedad 'familias'
+          if (this.usuario && this.usuario.familias) {
+            // Filtra los elementos que cumplen con la condición
+            this.familias = datosActualizados.filter(item => this.usuario.familias.includes(item.id));
+    
+            // Añade la propiedad 'is_admin' a cada familia según el ID del usuario actual
+            this.familias.forEach(familia => {
+              familia.is_admin = familia.admin_familia === this.usuario.id;
+            });
+          }
+        });
       }
     })
 
   }
-
-  logout(){
-    localStorage.clear();
-    this.msj('Has cerrado sesión')
-    this.router.navigateByUrl('');
-  }
-
-  updateAccount(){
-    this.router.navigateByUrl('/modificar-usuario');
-  }
-
-  manageFamilys(){
-    this.router.navigateByUrl('/listar-familias');
-
-  }
-  async msj(msg: string) {
-    const alertError = await this.alertController.create({
-      header: msg,
-
-      buttons: [
-        {
-            text: 'Ok',
-            role: 'cancel',
-            cssClass: 'danger',
-        },
-      ]
-    });
-    await alertError.present();
-  }
+  
 }

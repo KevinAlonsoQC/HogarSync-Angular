@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/Servicios/service.service';
-import { AlertController } from '@ionic/angular';
+import { FunctionsService } from 'src/app/Servicios/functions.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -21,7 +21,7 @@ export class ModificarUsuarioPage implements OnInit {
     private api:ApiService,
     private router: Router,
     private _builder: FormBuilder,
-    private alertController: AlertController
+    private functions: FunctionsService
   ) { 
     
   }
@@ -81,29 +81,18 @@ export class ModificarUsuarioPage implements OnInit {
       const { passwordNew, ...datosUsuario } = this.formulario.value;
       this.api.UpdateUsuario(Number(localStorage.getItem('infoUser')),datosUsuario).subscribe(datos => {
         if(datos){
-          this.msj('Cuenta Actualizada')
+          this.functions.msj('Cuenta Actualizada')
           this.router.navigateByUrl('inicio')
         }
       })
     }else{
-      this.msj('Ingresa tu Contraseña Actual para guardar los cambios')
+      this.functions.msj('Ingresa tu Contraseña Actual para guardar los cambios')
     }
     
   }
 
-  async msj(msg: string) {
-    const alertError = await this.alertController.create({
-      header: msg,
-
-      buttons: [
-        {
-            text: 'Ok',
-            role: 'cancel',
-            cssClass: 'danger',
-        },
-      ]
-    });
-    await alertError.present();
+  volver(){
+    this.functions.volverPage();
   }
   
 }

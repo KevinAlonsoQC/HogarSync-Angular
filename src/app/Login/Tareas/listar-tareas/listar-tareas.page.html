@@ -1,0 +1,41 @@
+<div class="ion-page ion-text-center">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Tareas de {{nombre_familia}} </ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="volver()"><ion-icon name="arrow-back-sharp" size="small"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content class="ion-padding ion-text-center">
+    <ion-fab (click)="create_task()" vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button>
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+    <div *ngIf="tareas?.length > 0; else noTareas">
+      <div *ngFor="let pro of tareas">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ pro.nombre_tarea }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-button (click)="modificarTarea(pro)">Modificar</ion-button>
+            <ion-button (click)="eliminarTarea(pro)" color="danger">Eliminar</ion-button>
+          </ion-card-content>
+        </ion-card>
+        <br>
+      </div>
+    </div>
+    
+      
+
+      <ng-template #noTareas>
+        <p class="ion-text-center" style="font-size: 25px; font-weight:700;">No existen tareas en este núcleo Familiar</p>
+      </ng-template>
+  </ion-content>
+</div>

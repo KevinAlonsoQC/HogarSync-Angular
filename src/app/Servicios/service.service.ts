@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { Usuario, UsuarioID, UsuarioOp } from '../Modelos/usuario';
 import { Familia, FamiliaID, FamiliaOp } from '../Modelos/familia';
@@ -21,11 +20,6 @@ const httpOptions = {
 
 export class ApiService {
   private url_api = 'http://localhost:5000';
-
-  NowPage = 1;
-
-  private cache_Familias = new BehaviorSubject<Array<FamiliaID>>([]);
-  $Familias_Lista = this.cache_Familias.asObservable();
 
   constructor(private http:HttpClient) { }
 
@@ -53,27 +47,7 @@ export class ApiService {
 
   //Familia
   CallBack_All_Familias(){
-    return this.http.get<Array<FamiliaID>>(this.url_api);
-  }
-
-  CallBack_Familias(){
-    this.http.get<Array<FamiliaID>>(`${this.url_api}/familia?_page=1`).subscribe(datos =>
-      {
-        this.NowPage = this.NowPage + 1;
-        this.cache_Familias.next(datos);
-      }
-    );
-  }
-
-  CallBack_More_Familias(){
-    this.http.get<Array<FamiliaID>>(`${this.url_api}/familia?_page=${this.NowPage}`).pipe(delay(2500)).subscribe(datos =>
-      {
-        if(datos){
-          this.NowPage = this.NowPage + 1;
-          this.cache_Familias.next(this.cache_Familias.getValue().concat(datos)); //concat: combina listas iguales
-        }
-      }
-    );
+    return this.http.get<Array<FamiliaID>>(`${this.url_api}/familia`);
   }
 
   CallBack_One_Familia(id: number): Observable<FamiliaID | null> {
@@ -90,6 +64,32 @@ export class ApiService {
 
   UpdateFamiliaId(id: number, payload: FamiliaOp): Observable<any>{
     return this.http.patch(`${this.url_api}/familia/${id}`, payload, httpOptions)
+  }
+
+  UpdateFamiliaInvite(id: number, payload: FamiliaOp): Observable<any>{
+    return this.http.put(`${this.url_api}/familia/${id}`, payload, httpOptions)
+  }
+
+
+  //Tareas
+  CallBack_All_Tareas(){
+    return this.http.get<Array<JobID>>(`${this.url_api}/job`);
+  }
+
+  CallBack_One_Tarea(id: number): Observable<JobID | null> {
+    return this.http.get<JobID | null>(`${this.url_api}/job/${id}`);
+  }
+
+  AddTarea(Job: Job){
+    return this.http.post(`${this.url_api}/job`, Job, httpOptions)
+  }
+
+  DeleteTareasId(id: number): Observable<any> {
+    return this.http.delete(`${this.url_api}/job/${id}`)
+  }
+
+  UpdateTareasId(id: number, payload: JobOp): Observable<any>{
+    return this.http.patch(`${this.url_api}/job/${id}`, payload, httpOptions)
   }
 
 }

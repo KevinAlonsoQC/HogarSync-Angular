@@ -28,12 +28,20 @@ const routes: Routes = [
     loadChildren: () => import('./Login/Familia/listar-familias/listar-familias.module').then( m => m.ListarFamiliasPageModule)
   },
   {
-    path: 'crear-familia',
-    loadChildren: () => import('./Login/Familia/crear-familia/crear-familia.module').then( m => m.CrearFamiliaPageModule)
+    path: 'administrar-familia/:idFamilia',
+    loadChildren: () => import('./Login/Familia/administrar-familia/administrar-familia.module').then( m => m.AdministrarFamiliaPageModule)
   },
   {
-    path: 'modificar-familia',
-    loadChildren: () => import('./Login/Familia/modificar-familia/modificar-familia.module').then( m => m.ModificarFamiliaPageModule)
+    path: 'listar-tareas/:idFamilia',
+    loadChildren: () => import('./Login//Tareas/listar-tareas/listar-tareas.module').then( m => m.ListarTareasPageModule)
+  },
+  {
+    path: 'listar-miembros/:idFamilia',
+    loadChildren: () => import('./Login/Usuario/listar-miembros/listar-miembros.module').then( m => m.ListarMiembrosPageModule)
+  },
+  {
+    path: 'unirse-familia/:idFamilia/:token',
+    loadChildren: () => import('./Login/Usuario/unirse-familia/unirse-familia.module').then( m => m.UnirseFamiliaPageModule)
   },
 ];
 

@@ -67,8 +67,10 @@
     </form>
 
     <br><br>
-    <ion-button (click)="cambiarPassword()">Cambiar Contraseña</ion-button>
+    <ion-button *ngIf="!changePassword" (click)="cambiarPassword()">Cambiar Contraseña</ion-button>
+    <ion-button *ngIf="changePassword" (click)="cambiarPassword()">Cancelar Cambio</ion-button>
+
     <br><br>
-    <ion-button fill="clear" [routerLink]="['/inicio']">Volver</ion-button>
+    <ion-button fill="clear" (click)="volver()">Cancelar y Volver</ion-button>
   </ion-content>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService  } from '../Servicios/service.service';
+import { FunctionsService } from '../Servicios/functions.service';
 import { AlertController } from '@ionic/angular';
 import { UsuarioID } from '../Modelos/usuario';
 
@@ -17,7 +18,7 @@ export class RegisterPage implements OnInit {
   public formulario!: FormGroup|any;
   public registrado: boolean = false;
 
-  constructor(private _builder: FormBuilder, private router: Router, private api: ApiService, private alertController: AlertController) {
+  constructor(private _builder: FormBuilder, private router: Router, private api: ApiService, private alertController: AlertController, private functions: FunctionsService) {
     
   }
 
@@ -62,7 +63,7 @@ export class RegisterPage implements OnInit {
     for(let info of this.usuarios){
       if(info.correo === this.formulario.value.correo){
         register_user = true
-        this.mostrarAlerta('Este correo ya está registrado.');
+        this.functions.msj('Este correo ya está registrado.');
         break
       }
     }
@@ -79,7 +80,7 @@ export class RegisterPage implements OnInit {
         },
         (error) => {
           console.error('Error al registrar el usuario:', error);
-          this.mostrarAlerta('Hubo un error al procesar la solicitud.');
+          this.functions.msj('Hubo un error al procesar la solicitud.');
   
         }
       );
@@ -88,15 +89,7 @@ export class RegisterPage implements OnInit {
     
   }
 
-  async mostrarAlerta(mensaje: string) {
-    const alert = await this.alertController.create({
-      header: 'Alerta',
-      message: mensaje,
-      buttons: ['Aceptar']
-    });
-  
-    await alert.present();
-  }
-  
-  
+  volver(){
+    this.functions.volverPage();
+  }  
 }

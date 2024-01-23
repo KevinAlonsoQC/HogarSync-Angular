@@ -1,8 +1,6 @@
-import { FamiliaID } from "./familia";
-
 export interface Job {
     nombre_tarea: string;
-    familia: FamiliaID;
+    familia: number;
 }
   
 export interface JobID extends Job {

@@ -1,0 +1,31 @@
+<div class="ion-page ion-text-center">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>HogarSync</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="volver()"><ion-icon name="arrow-back-sharp" size="small"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="ion-padding">     
+    <ion-content>
+      <ion-list [inset]="true" *ngIf="miembros.length > 0; else noMembers">
+          <div *ngFor="let pro of miembros"> 
+            <ion-item>
+              <ion-label>{{pro.nombre | uppercase}} {{pro.apellido | uppercase}}</ion-label>
+              <ion-button *ngIf="pro.id !== idUser" color="danger" (click)="removeMember(pro)">Expulsar</ion-button>
+              <ion-button *ngIf="pro.id === idUser" color="success">Tú</ion-button>
+
+            </ion-item>          
+          </div>
+      </ion-list>
+    </ion-content>
+    
+      <ng-template #noMembers>
+        <p class="ion-text-center" style="font-size: 25px; font-weight:700;">Nadie pertenece a tu Familia :(</p>
+      </ng-template>
+  </ion-content>
+  
+  
+</div>

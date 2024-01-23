@@ -1,12 +1,8 @@
-import { FamiliaID } from "./familia";
-import { UsuarioID } from "./usuario";
-import { Job } from "./job";
-
 export interface TareaRealizada {
     id: number;
-    tarea: Job;
-    nombre_familia: FamiliaID;
-    responsable: UsuarioID;
+    tarea: number; //ID de la tarea realizada
+    familia: number; //id de la familia en la cual se realizó
+    usuario: number; //id del usuario que la realizó
     fecha_hora: Date;
     imagen: string | null;
 }
