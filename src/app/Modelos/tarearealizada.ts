@@ -1,10 +1,8 @@
 export interface TareaRealizada {
-    id: number;
-    tarea: number; //ID de la tarea realizada
+    tarea: string;
     familia: number; //id de la familia en la cual se realizó
-    usuario: number; //id del usuario que la realizó
-    fecha_hora: Date;
-    imagen: string | null;
+    usuario: string; //nombre y apellido del usuario que la realizó
+    fecha_hora: string;
 }
 
 export interface TareaRealizadaID extends TareaRealizada {

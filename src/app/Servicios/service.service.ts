@@ -28,6 +28,11 @@ export class ApiService {
     return this.http.get<Array<UsuarioID>>(`${this.url_api}/usuario`);
   }
 
+  //Usuarios
+  Callback_All_Usuarios(){
+    return this.http.get<Array<UsuarioID>>(`${this.url_api}/usuario`);
+  }
+
   CallBack_One_Usuario(id: number): Observable<UsuarioID[]> {
     return this.http.get<UsuarioID[]>(`${this.url_api}/usuario/${id}`);
   }
@@ -90,6 +95,27 @@ export class ApiService {
 
   UpdateTareasId(id: number, payload: JobOp): Observable<any>{
     return this.http.patch(`${this.url_api}/job/${id}`, payload, httpOptions)
+  }
+
+  //Historial y Mensajes
+  CallBack_All_Tareas_Realizadas(){
+    return this.http.get<Array<TareaRealizadaID>>(`${this.url_api}/tarea_realizada`);
+  }
+
+  CallBack_One_Tareas_Realizadas(id: number): Observable<TareaRealizadaID | null> {
+    return this.http.get<TareaRealizadaID | null>(`${this.url_api}/tarea_realizada/${id}`);
+  }
+
+  AddTareas_Realizadas(TareaRealizada: TareaRealizada){
+    return this.http.post(`${this.url_api}/tarea_realizada`, TareaRealizada, httpOptions)
+  }
+
+  DeleteTareas_RealizadasId(id: number): Observable<any> {
+    return this.http.delete(`${this.url_api}/tarea_realizada/${id}`)
+  }
+
+  UpdateTareas_RealizadasId(id: number, payload: TareaRealizadaOp): Observable<any>{
+    return this.http.patch(`${this.url_api}/tarea_realizada/${id}`, payload, httpOptions)
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController,ToastController } from '@ionic/angular';
 import { ApiService } from '../Servicios/service.service';
 import { NgForm } from '@angular/forms'; // Asegúrate de importar NgForm
 import { UsuarioID } from '../Modelos/usuario';
@@ -25,14 +25,27 @@ export class HomePage implements OnInit {
     private router: Router,
     private alertController: AlertController,
     private api: ApiService,
+    private toastController: ToastController,
   ) {
 
   }
+  
   ngOnInit() {
   }
 
   ionViewWillEnter(){
     this.api.CallBack_Usuarios().subscribe(callback => (this.usuarios = callback))
+  }
+
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: '!Iniciaste Sesión con éxito!',
+      duration: 3000,
+      position: 'top',
+      color: 'success'
+    });
+
+    await toast.present();
   }
 
   login(loginForm: NgForm) {    
@@ -43,6 +56,8 @@ export class HomePage implements OnInit {
       for(let info of this.usuarios){
         if(info.correo === email && info.password === password ){
           this.sesion = true
+          
+          this.presentToast();
           localStorage.setItem('infoUser', String(info.id));
           localStorage.setItem('ingresado', 'true')
           this.router.navigateByUrl('inicio')

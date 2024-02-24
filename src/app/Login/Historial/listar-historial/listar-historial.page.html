@@ -1,0 +1,42 @@
+<div class="ion-page ion-text-center">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Historial de {{nombre_familia}} </ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="volver()"><ion-icon name="arrow-back-sharp" size="small"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-content class="ion-padding ion-text-center">
+    <div *ngIf="tareas?.length > 0; else noTareas">
+      <div *ngFor="let pro of ordenarTareasPorId(tareas)">
+        <ion-card>
+          <img alt="Imagen_Tarea" src="{{pro.imagen}}" style="width:250px; height: 200px;" />
+          <ion-card-header>
+            <ion-card-title>
+              <b>{{pro.tarea}}</b>
+            </ion-card-title>
+
+          </ion-card-header>
+            <b>Tarea Realizada por: </b> <br> {{pro.usuario | uppercase}} <br> <br>
+            <b>Hora y Fecha</b> <br> {{ pro.fecha_hora }}
+
+            <br> <br>
+            <ion-button *ngIf="isAdminFamily" (click)="eliminarHistorial(pro)" color="tertiary">Eliminar</ion-button>
+          <ion-card-content>
+            
+          </ion-card-content>
+        </ion-card>
+        <br>
+      </div>
+    </div>
+    
+      
+
+      <ng-template #noTareas>
+        <p class="ion-text-center" style="font-size: 25px; font-weight:700;">No existe historial de tareas en este núcleo Familiar</p>
+      </ng-template>
+  </ion-content>
+</div>
